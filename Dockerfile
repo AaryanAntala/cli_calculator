@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy application files
 COPY app.py .
-COPY test.py .
+COPY test_calculator.py .
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
