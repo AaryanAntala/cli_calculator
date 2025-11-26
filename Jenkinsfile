@@ -65,8 +65,13 @@ pipeline {
             steps {
                 sh '''
                   docker pull $IMAGE
-                  docker stop cli_calculator || true
-                  docker rm cli_calculator || true
+                  # Stop and remove any existing container with the same name
+                  docker stop cli_calculator 2>/dev/null || true
+                  docker rm cli_calculator 2>/dev/null || true
+                  # Stop any container using port 5000
+                  docker ps -q --filter "publish=5000" | xargs -r docker stop
+                  docker ps -aq --filter "publish=5000" | xargs -r docker rm
+                  # Run the new container
                   docker run -d -p 5000:5000 --name cli_calculator $IMAGE
                 '''
             }
