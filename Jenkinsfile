@@ -4,7 +4,8 @@ pipeline {
     environment {
         IMAGE = "aaryanantala/cli_calculator:jenkins"
         VENV = ".venv"
-        PYTHON = "/usr/bin/python3" 
+        PYTHON = "/usr/bin/python3"
+        PATH = "/usr/local/bin:${env.PATH}"
     }
 
     stages {
